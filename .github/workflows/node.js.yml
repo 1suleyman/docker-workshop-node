@@ -75,7 +75,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWSREGION }}
           ECR_REPOSITORY: ${{ secrets.ECRREPOSITORY }}
         run: |
-          ECR_REGISTRY="${AWS_ACCOUNTID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+          ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
           IMAGE_TAG="sha-${GITHUB_SHA}"
           IMAGE_URI="${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
 
