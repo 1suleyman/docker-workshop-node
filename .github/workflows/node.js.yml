@@ -75,15 +75,15 @@ jobs:
           AWS_REGION: ${{ secrets.AWSREGION }}
           ECR_REPOSITORY: ${{ secrets.ECRREPOSITORY }}
         run: |
-          ECR_REGISTRY="${AWSACCOUNTID}.dkr.ecr.${AWSREGION}.amazonaws.com"
+          ECR_REGISTRY="${AWS_ACCOUNTID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
           IMAGE_TAG="sha-${GITHUB_SHA}"
-          IMAGE_URI="${ECR_REGISTRY}/${ECRREPOSITORY}:${IMAGE_TAG}"
+          IMAGE_URI="${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
 
           docker build -t "$IMAGE_URI" .
           docker push "$IMAGE_URI"
 
           if [ "${{ github.ref_name }}" = "main" ]; then
-            LATEST_URI="${ECR_REGISTRY}/${ECRREPOSITORY}:latest"
+            LATEST_URI="${ECR_REGISTRY}/${ECR_REPOSITORY}:latest"
             docker tag "$IMAGE_URI" "$LATEST_URI"
             docker push "$LATEST_URI"
           fi
