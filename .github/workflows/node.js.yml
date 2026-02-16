@@ -43,6 +43,8 @@ jobs:
 
     - run: npm test --if-present
       working-directory: backend
+      env:
+        SQLITE_DB_LOCATION: /tmp/todos/todo.db
 
     - run: npm test --if-present
       working-directory: client
